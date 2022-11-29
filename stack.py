@@ -22,21 +22,19 @@ class Stack:
 result = Stack()
 
 
-TEST = '[([])((([[[]]])))]{()}'
+TEST = '((([[[]]])))'
 
 
 def chek_pair(line):
     for i in line:
         if i in '({[':
             result.get_push(i)
+        elif result.is_empty():
+            return False
+        elif result.get_peek() + i in ['()', '[]', '{}']:
+            result.get_pop()
         else:
-            if result.is_empty():
-                return False
-            else:
-                if result.get_peek() + i in ['()', '[]', '{}']:
-                    result.get_pop()
-                else:
-                    return False
+            return False
     return result.is_empty()
 
 print('Сбалансированно' if chek_pair(TEST) else 'Несбалансированно')
