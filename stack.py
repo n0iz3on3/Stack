@@ -29,10 +29,13 @@ def chek_pair(line):
     for i in line:
         if i in '({[':
             result.get_push(i)
+
         elif result.is_empty():
             return False
+
         elif result.get_peek() + i in ['()', '[]', '{}']:
             result.get_pop()
+
         else:
             return False
     return result.is_empty()
